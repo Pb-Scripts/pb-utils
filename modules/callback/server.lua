@@ -43,14 +43,14 @@ local function triggerClientCallback(_, event, playerId, cb, ...)
 end
 
 ---@overload fun(event: string, playerId: number, cb: function, ...)
-lib.callback = setmetatable({}, {
+pb.callback = setmetatable({}, {
 	__call = triggerClientCallback
 })
 
 ---@param event string
 ---@param playerId number
 --- Sends an event to a client and halts the current thread until a response is returned.
-function lib.callback.await(event, playerId, ...)
+function pb.callback.await(event, playerId, ...)
 	return triggerClientCallback(nil, event, playerId, false, ...)
 end
 
@@ -71,12 +71,12 @@ local pcall = pcall
 ---@param name string
 ---@param cb function
 --- Registers an event handler and callback function to respond to client requests.
-function lib.callback.register(name, cb)
+function pb.callback.register(name, cb)
 	RegisterNetEvent(cbEvent:format(name), function(resource, key, ...)
 		TriggerClientEvent(cbEvent:format(resource), source, key, callbackResponse(pcall(cb, source, ...)))
 	end)
 end
 
-return lib.callback
+return pb.callback
 
 
