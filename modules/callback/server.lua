@@ -1,7 +1,7 @@
 local events = {}
 local cbEvent = ('__ox_cb_%s')
 
-RegisterNetEvent(cbEvent:format(cache.resource), function(key, ...)
+RegisterNetEvent(cbEvent:format(GetCurrentResourceName()), function(key, ...)
 	local cb = events[key]
 	return cb and cb(...)
 end)
@@ -19,7 +19,7 @@ local function triggerClientCallback(_, event, playerId, cb, ...)
 		key = ('%s:%s:%s'):format(event, math.random(0, 100000), playerId)
 	until not events[key]
 
-	TriggerClientEvent(cbEvent:format(event), playerId, cache.resource, key, ...)
+	TriggerClientEvent(cbEvent:format(event), playerId, GetCurrentResourceName(), key, ...)
 
 	---@type promise | false
 	local promise = not cb and promise.new()

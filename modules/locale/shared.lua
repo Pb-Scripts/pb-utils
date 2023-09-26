@@ -24,14 +24,14 @@ end
 
 function pb.locale()
     local lang = GetConvar('pb:locale', 'en')
-    local locales = json.decode(LoadResourceFile(cache.resource, ('locales/%s.json'):format(lang)))
+    local locales = json.decode(LoadResourceFile(GetCurrentResourceName(), ('locales/%s.json'):format(lang)))
 
     if not locales then
         local warning = "could not load 'locales/%s.json'"
         warn(warning:format(lang))
 
         if lang ~= 'en' then
-            locales = json.decode(LoadResourceFile(cache.resource, 'locales/en.json'))
+            locales = json.decode(LoadResourceFile(GetCurrentResourceName(), 'locales/en.json'))
 
             if not locales then
                 warn(warning:format('en'))

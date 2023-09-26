@@ -36,8 +36,7 @@ CreateThread(function()
 			nearbyCount = 0
 		end
 
-		local coords = GetEntityCoords(cache.ped)
-		cache.coords = coords
+		local coords = GetEntityCoords(PlayerPedId())
 
         if closestPoint and #(coords - closestPoint.coords) > closestPoint.distance then
             closestPoint = nil

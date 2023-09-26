@@ -2,7 +2,7 @@ local events = {}
 local timers = {}
 local cbEvent = ('__ox_cb_%s')
 
-RegisterNetEvent(cbEvent:format(cache.resource), function(key, ...)
+RegisterNetEvent(cbEvent:format(GetCurrentResourceName()), function(key, ...)
 	local cb = events[key]
 	return cb and cb(...)
 end)
@@ -38,7 +38,7 @@ local function triggerServerCallback(_, event, delay, cb, ...)
 		key = ('%s:%s'):format(event, math.random(0, 100000))
 	until not events[key]
 
-	TriggerServerEvent(cbEvent:format(event), cache.resource, key, ...)
+	TriggerServerEvent(cbEvent:format(event), GetCurrentResourceName(), key, ...)
 
 	---@type promise | false
 	local promise = not cb and promise.new()
