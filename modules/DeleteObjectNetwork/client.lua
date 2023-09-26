@@ -3,3 +3,4 @@ function pb.DeleteObjectNetwork(netId)
     return true
 end
 
+return pb.DeleteObjectNetwork
