@@ -1,19 +1,3 @@
-local function init(veh, ped, source)
-    for i = -1, 0 do
-        local pedins = GetPedInVehicleSeat(veh, i)
-
-        if pedins ~= ped and ped > 0 and NetworkGetEntityOwner(ped) == source then
-            DeleteEntity(pedins)
-        end
-    end
-
-    if NetworkGetEntityOwner(veh) ~= source then return end
-    SetVehicleNeedsToBeHotwired(veh, false)
-    SetVehRadioStation(veh, 'OFF')
-    SetVehicleFuelLevel(veh, 100.0)
-    SetVehicleDirtLevel(veh, 0.0)
-end
-
 function pb.CreateVehicle(source, model, coords, warp, plate)
     model = type(model) == 'string' and joaat(model) or model
 
@@ -45,7 +29,6 @@ function pb.CreateVehicle(source, model, coords, warp, plate)
     end
 
     if plate then SetVehicleNumberPlateText(veh, plate) end
-    init(veh, ped, source)
     if warp then SetPedIntoVehicle(ped, veh, -1) end
     return NetworkGetNetworkIdFromEntity(veh)
 end
