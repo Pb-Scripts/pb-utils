@@ -1,8 +1,8 @@
 function pb.notify(type, title, label)
     lib.notify({
-        type = 'error',
-        title = locale('error'),
-        description = locale('not_enough_money')
+        type = type,
+        title = title,
+        description = label
     })
 end
 
