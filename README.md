@@ -1,6 +1,6 @@
 # Pb-UTILS
 
-Used for all my realeases don't usaly my releases won't need any framework only this util functions
+Usaly my releases won't need any framework only this util functions
 
 ## Targets | Notify | Menus
 All of that could be change by you in modules with name
