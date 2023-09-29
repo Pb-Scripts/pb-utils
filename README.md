@@ -1,6 +1,6 @@
 # Pb-UTILS
 
-Used for all my realeases don't usaly my releases won't need any framework only this util functions
+Usaly my releases won't need any framework only this util functions
 
 ## Targets | Notify | Menus
 All of that could be change by you in modules with name
@@ -24,3 +24,5 @@ If you want to use my locales need to add an convar with name pb:locale in serve
 
 Example:
 setr pb:locale "pt"
+
+I used ox_lib Locales, callbacks and all them Interface Menus
