@@ -24,3 +24,5 @@ If you want to use my locales need to add an convar with name pb:locale in serve
 
 Example:
 setr pb:locale "pt"
+
+I use ox_lib in here but you can change it for every type of context menu, target, notification, locales you want
