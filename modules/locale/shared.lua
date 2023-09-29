@@ -1,3 +1,4 @@
+#Code from ox_lib locales
 ---@type { [string]: string }
 local dict = {}
 

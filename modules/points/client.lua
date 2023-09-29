@@ -1,3 +1,4 @@
+#Code from ox_lib points
 ---@class PointProperties
 ---@field coords vector3
 ---@field distance number
