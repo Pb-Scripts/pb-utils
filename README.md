@@ -25,4 +25,7 @@ If you want to use my locales need to add an convar with name pb:locale in serve
 Example:
 setr pb:locale "pt"
 
-I used ox_lib Locales, callbacks and all them Interface Menus
+I used ox_lib Locales, callbacks and points.
+https://github.com/overextended/ox_lib
+
+But the idea is you can chage it for your or QBCore for example if you want to
