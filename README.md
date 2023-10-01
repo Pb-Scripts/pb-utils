@@ -1,6 +1,6 @@
 # Pb-UTILS
 
-Usaly my releases won't need any framework only this util functions
+Usaly my releases won't need any specific framework only this util functions
 
 ## Targets | Notify | Menus
 All of that could be change by you in modules with name
@@ -25,7 +25,7 @@ If you want to use my locales need to add an convar with name pb:locale in serve
 Example:
 setr pb:locale "pt"
 
-I used ox_lib Locales, callbacks and points.
+I used ox_lib callbacks.
 https://github.com/overextended/ox_lib
 
 But the idea is you can chage it for your or QBCore for example if you want to
