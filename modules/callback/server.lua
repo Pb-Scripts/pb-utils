@@ -1,4 +1,4 @@
-#Code from ox_lib callback
+--#Code from ox_lib callback
 local events = {}
 local cbEvent = ('__ox_cb_%s')
 
@@ -79,5 +79,3 @@ function pb.callback.register(name, cb)
 end
 
 return pb.callback
-
-

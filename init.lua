@@ -1,44 +1,36 @@
-local lib_name = 'pb-utils'
-local context = IsDuplicityVersion() and 'server' or 'client'
-function nothing() return end
-
-local function loadModule(self, module)
-    local dir = ('modules/%s'):format(module)
-    local chunk = LoadResourceFile(lib_name, ('%s/%s.lua'):format(dir, context))
-    local shared = LoadResourceFile(lib_name, ('%s/shared.lua'):format(dir))
-
-    if shared then
-        chunk = (chunk and ('%s\n%s'):format(shared, chunk)) or shared
-    end
-
-    if chunk then
-        local fn, err = load(chunk, ('@@'..lib_name..'/modules/%s/%s.lua'):format(module, context))
-
-        if not fn or err then
-            return error(('\n^1Error importing module (%s): %s^0'):format(dir, err), 3)
+local function import(object, module_name)
+    local file = LoadResourceFile('pb-utils', 'modules/'..module_name..'/'..object.context..'.lua')
+    if not file then file = LoadResourceFile('pb-utils', 'modules/'..module_name..'/shared.lua') end
+    if file then
+        local funct, err = load(file)
+        if funct then
+            local nonerror, err = pcall(funct)
+            if nonerror then
+                return object[module_name]
+            else
+                print("You have an error while executing the file: "..err)
+                return
+            end
+        else
+            print("You have an error while compiling the file: "..err)
+            return
         end
-
-        local result = fn()
-        self[module] = result or noop
-        return self[module]
     end
+
 end
 
-local function call(self, index, ...)
-    local module = rawget(self, index)
-
+local function import_module(object, module_name)
+    local module = rawget(object, module_name)
     if not module then
-        self[index] = nothing()
-        module = loadModule(self, index)
+        module = import(object, module_name)
     end
-
     return module
 end
 
 pb = setmetatable({
-    name = lib_name,
-    context = context,
+    context = IsDuplicityVersion() and 'server' or 'client',
+    resname = GetCurrentResourceName()
 }, {
-    __index = call,
-    __call =  call
+    __index = import_module,
+    __call =  import_module
 })
