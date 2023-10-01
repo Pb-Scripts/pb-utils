@@ -1,33 +1,22 @@
-#Code from ox_lib getClosestPlayer
----@param coords vector3 The coords to check from.
----@param maxDistance number The max distance to check.
----@param includePlayer boolean Whether or not to include the current player.
----@return number? playerId
----@return number? playerPed
----@return vector3? playerCoords
-function pb.getClosestPlayer(coords, maxDistance, includePlayer)
+function pb.getClosestPlayer(distance, coords, selfCount)
 	local players = GetActivePlayers()
-	local closestId, closestPed, closestCoords
-	maxDistance = maxDistance or 2.0
+	local closestId, closestPed
 
-	for i = 1, #players do
-		local playerId = players[i]
+	for _,playerId in pairs(players) do
 
-		if playerId ~= PlayerId() or includePlayer then
+		if selfCount and playerId ~= PlayerId() then
 			local playerPed = GetPlayerPed(playerId)
 			local playerCoords = GetEntityCoords(playerPed)
-			local distance = #(coords - playerCoords)
+			local distBetween = #(coords - playerCoords)
 
-			if distance < maxDistance then
-				maxDistance = distance
+			if distance < distBetween then
+				distance = distBetween
 				closestId = playerId
-				closestPed = playerPed
-				closestCoords = playerCoords
 			end
 		end
 	end
 
-	return closestId, closestPed, closestCoords
+	return closestId
 end
 
 return pb.getClosestPlayer
